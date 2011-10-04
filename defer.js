@@ -10,8 +10,8 @@
 
         // ### Defer.trigger
         // Triggers any functions on the deferred stack.
-        this.trigger = function trigger () {
-            context = this;
+        this.trigger = function trigger (context) {
+            context = context || this;
             deferred.forEach(function (fn) {
                 next(fn.bind(context));
             });
