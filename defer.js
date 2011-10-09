@@ -4,38 +4,43 @@
     var next = (typeof process === 'undefined' || !process.nextTick) ? function (fn) { setTimeout(fn, 0); } : process.nextTick;
 
     // Main export
-    root.Defer = function () {
+    function Defer () {
         // Keep track of our context and any deferred functions.
-        var udef, context, deferred = [];
-
-        // ### Defer.trigger
-        // Triggers any functions on the deferred stack.
-        this.trigger = function trigger (context) {
-            context = context || this;
-            deferred.forEach(function (fn) {
-                next(fn.bind(context));
-            });
-            deferred = [];
-        };
-
-        // ### Defer.defer (fn)
-        // #### fn `{Function}` Function to defer execution of
-        // If the event has been called execute `fn` immeditely. Otherwise wait until `trigger` is called.
-        this.defer = function defer (fn) {
-            if (context) {
-                next(fn.bind(context));
-            } else {
-                deferred.push(fn);
-            }
-        };
-
-        // ### Defer.reset
-        // Resets the `trigger`. Useful for staging multiple deferred functions and then restacking more for
-        // another event.
-        this.reset = function reset () {
-            context = udef;
-        };
+        this.udef;
+        this.context;
+        this.deferred = [];
 
         return this;
     };
+
+    // ### Defer.trigger
+    // Triggers any functions on the deferred stack.
+    Defer.prototype.trigger = function trigger () {
+        this.context = this;
+        this.deferred.forEach(function (fn) {
+            next(fn.bind(context));
+        });
+        this.deferred = [];
+    };
+
+    // ### Defer.defer (fn)
+    // #### fn `{Function}` Function to defer execution of
+    // If the event has been called execute `fn` immeditely. Otherwise wait until `trigger` is called.
+    Defer.prototype.defer = function defer (fn) {
+        if (this.context) {
+            next(fn.bind(this.context));
+        } else {
+            this.deferred.push(fn);
+        }
+    };
+
+    // ### Defer.reset
+    // Resets the `trigger`. Useful for staging multiple deferred functions and then restacking more for
+    // another event.
+    Defer.prototype.reset = function reset () {
+        this.context = this.udef;
+    };
+
+    root.Defer = Defer;
+
 }(typeof exports === "undefined" ? window : exports));

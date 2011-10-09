@@ -1,5 +1,5 @@
 {
-    "name" : "defer",
+    "name" : "defer.js",
     "author" : "Joshua Kehn <josh@kehn.us>",
     "description" : "Simple defer pattern for JavaScript",
     "version" : "1.0.0",
