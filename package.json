@@ -2,7 +2,7 @@
     "name" : "defer.js",
     "author" : "Joshua Kehn <josh@kehn.us>",
     "description" : "Simple defer pattern for JavaScript",
-    "version" : "1.0.0",
+    "version" : "1.0.1",
     "keywords" : ["defer", "deferjs", "defer.js", "event"],
     "repository" : "git://github.com/joshkehn/defer.js.git",
     "main" : "defer"

@@ -39,6 +39,7 @@
     // another event.
     Defer.prototype.reset = function reset () {
         this.context = this.udef;
+        this.deferred = [];
     };
 
     root.Defer = Defer;

@@ -1,6 +1,6 @@
 # DeferJS
 
-Provides an easy deferrment pattern for evented systems.
+Provides an easy deferment pattern for evented systems.
 
 ## TODO's
 
